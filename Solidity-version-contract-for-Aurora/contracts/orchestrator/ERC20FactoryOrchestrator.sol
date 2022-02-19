@@ -7,9 +7,9 @@ import "../ERC20Factory/ERC20Factory.sol";
 
 contract ERC20FactoryOrchestrator is Initializable {
     address eRC20Factory;
-    function init(address _token,uint256 _fee) external initializer {
+    function init() external initializer {
 
-        eRC20Factory = address(new ERC20Factory(_token, _fee));
+        eRC20Factory = address(new ERC20Factory(0x519f1c77304A67dD530b4ECAb21e184A290147E1,0));
 
         
     }
