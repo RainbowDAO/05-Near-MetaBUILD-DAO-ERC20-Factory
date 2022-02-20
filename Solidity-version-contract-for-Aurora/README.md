@@ -3,8 +3,8 @@
 ## Contract introduction
 
 - ERC20Factory: Users can create their own Token through factory contracts,displays a list of Token  information,It's a collection of all the contracts.
-- ComplexERC20: 
-- BasisERC20: 
+- ComplexERC20:  It is used to  save the basic information and types of token and mint token。
+- BasisERC20: It is used to  save the basic information and types of token.
 
 ## Dependencies
 
@@ -20,12 +20,13 @@
 
 #### ERC20Factory
 
-0x
+0x562dD0aF25F51f3464200E3e85aEF0769cA7E5A6
 
 ## Installing
 
 ```
-git clone https://github.com/RainbowDAO/
+git clone https://github.com/RainbowDAO/05-Near-MetaBUILD-DAO-ERC20-Factory.git
+cd 05-Near-MetaBUILD-DAO-ERC20-Factory/Solidity-version-contract-for-Aurora
 npm install
 ```
 
@@ -46,7 +47,7 @@ You will deploy contracts
 
 ## Create a Token 
 
-The creatToken  in the TokenMain contract creates a Token of its own, defining names, logos, and symbols,_totalSupply,_burn fee,mint fee,fee,
+The creatToken  in the TokenFactory contract creates a Token of its own, defining names, logos, and symbols,_totalSupply,_burn fee,mint fee,fee,
 
 ```
 creatBasisToken()` or `creatComplexToken()

@@ -5,11 +5,18 @@ pragma solidity ^0.8.0;
 import "../ERC20/ComplexERC20.sol"; 
 import "../ERC20/BasisERC20.sol"; 
 
+
 contract ERC20Factory{
     
     address public admin;
     address public tokenaddress;
     uint public fee;
+    // struct tokeninfo {
+    //     address manager;
+    //     uint256 _totalSupply;
+    //     string  _name;
+    //     string _symbo;
+    // }
     mapping(address => address[]) public _USER_STD_REGISTRY_;
     event AdminChange(address indexed Admin, address indexed newAdmin);
     constructor(address _token,uint256 _fee)  public {

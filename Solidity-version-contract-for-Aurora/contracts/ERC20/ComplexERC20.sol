@@ -32,6 +32,7 @@ contract ComplexERC20 is ERC20{
     mapping (address => mapping (uint32 => Checkpoint)) public checkpoints;
     mapping (address => uint32) public numCheckpoints;
     mapping (uint32 => uint256) public mintamounts;
+    mapping (uint32 => uint256) public mintamountsSupply;
     
     event DelegateVotesChanged(address indexed delegate, uint256 previousBalance, uint256 newBalance);
     event AdminChange(address indexed Admin, address indexed newAdmin);
@@ -97,7 +98,7 @@ contract ComplexERC20 is ERC20{
             uint256 mintamount = firsttotalSupply.mul(mintflag).div(10000);
             uint256 residue = mintamounts[year];
             require(mintamount > amount.add(residue));
-            
+            mintamountsSupply[year] =mintamount; 
             for (uint8 i; i < minter.length; i++){
                 uint256 mintamounttemp = mintamount.mul(minterfee[i]).div(10000);
                 _mint(minter[i], mintamounttemp );
@@ -110,7 +111,7 @@ contract ComplexERC20 is ERC20{
             uint256 mintamount = firsttotalSupply.mul(mintfee).div(10000);
             uint256 residue = mintamounts[year];
             require(mintamount > amount.add(residue));
-            
+            mintamountsSupply[year] =mintamount;
             for (uint8 i; i < minter.length; i++){
                 uint256 mintamounttemp = mintamount.mul(minterfee[i]).div(10000);
                 _mint(minter[i], mintamounttemp );
@@ -123,7 +124,7 @@ contract ComplexERC20 is ERC20{
             uint256 mintamount = firsttotalSupply.mul(mintfee).div(10000);
             uint256 residue = mintamounts[year];
             require(mintamount > amount.add(residue));
-            
+            mintamountsSupply[year] =mintamount;
             for (uint8 i; i < minter.length; i++){
                 uint256 mintamounttemp = mintamount.mul(minterfee[i]).div(10000);
                 _mint(minter[i], mintamounttemp );
@@ -136,7 +137,7 @@ contract ComplexERC20 is ERC20{
             uint256 mintamount = firsttotalSupply.mul(mintfee).div(10000);
             uint256 residue = mintamounts[year];
             require(mintamount > amount.add(residue));
-            
+            mintamountsSupply[year] =mintamount;
             for (uint8 i; i < minter.length; i++){
                 uint256 mintamounttemp = mintamount.mul(minterfee[i]).div(10000);
                 _mint(minter[i], mintamounttemp );
@@ -149,7 +150,7 @@ contract ComplexERC20 is ERC20{
             uint256 mintamount = firsttotalSupply.mul(mintfee).div(10000);
             uint256 residue = mintamounts[year];
             require(mintamount > amount.add(residue));
-            
+            mintamountsSupply[year] =mintamount;
             for (uint8 i; i < minter.length; i++){
                 uint256 mintamounttemp = mintamount.mul(minterfee[i]).div(10000);
                 _mint(minter[i], mintamounttemp );
@@ -167,8 +168,16 @@ contract ComplexERC20 is ERC20{
         
     }
     
-    
-   
+    function getMintamount(address user) public view returns (uint256 )
+    {
+        uint32 year = safe32(block.timestamp.sub(starttime).div(31536000),"time: Time error");
+        return mintamounts[year];
+    }
+   function getMintamountsSupply(address user) public view returns (uint256 )
+    {
+        uint32 year = safe32(block.timestamp.sub(starttime).div(31536000),"time: Time error");
+        return mintamountsSupply[year];
+    }
     function transferFrom(address sender, address recipient, uint256 amount) public virtual override returns (bool) {
         
         _transferErc20(sender,recipient,amount);
